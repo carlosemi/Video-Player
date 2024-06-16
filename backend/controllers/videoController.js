@@ -98,6 +98,7 @@ const getVideos = (async (req, res) => {
 // @route   PUT /api/videos
 // @access  Public
 const editVideo = (async (req, res) => {
+ 
     
 });
 
@@ -105,11 +106,12 @@ const editVideo = (async (req, res) => {
 // @route   GET /api/videos/single
 // @access  Public
 const getVideo = (async (req, res) => {
-    const {video_id} = req.body
+
+    const video_id = req.params.video_id
 
     if(!video_id){
         res.status(400)
-        throw new Error('No user_id');
+        throw new Error('No video_id');
     }
 
     try {

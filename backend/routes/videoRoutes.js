@@ -12,7 +12,7 @@ import {
 } from '../controllers/videoController.js';
 
 router.route('/').post(addVideo).get(getVideos).put(editVideo);
-router.route('/single').get(getVideo);
+router.route('/single/:video_id').get(getVideo);
 router.route('/comments').post(commentVideo).get(getComments)
 
 
