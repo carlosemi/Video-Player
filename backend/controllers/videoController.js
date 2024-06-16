@@ -46,10 +46,37 @@ const addVideo = (async (req, res) => {
     });
 })
 
-// @desc    Get all videos
+// @desc    Get User videos
 // @route   GET /api/videos
 // @access  Private
 const getVideos = (async (req, res) => {
+
+    const {user_id} = req.body
+
+    if(!user_id){
+        res.status(400)
+        throw new Error('Missing user_id')
+    }
+
+    // Define the path to the videos.js file using __dirname
+    const filePath = path.join(__dirname, '../data/videos.js');
+
+    // Read the content of the videos.js file
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+            res.status(500);
+            throw new Error('Failed to read videos file');
+        }
+
+        // Evaluate the file content to get the videos array
+        const videos = eval(data.replace('export default', ''));
+
+        // Filter videos by user_id
+        const userVideos = videos.filter(video => video.user_id === user_id);
+
+        res.status(200).json(userVideos);
+    });
+
     
 });
 
