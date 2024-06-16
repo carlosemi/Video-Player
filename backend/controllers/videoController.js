@@ -1,8 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import Video from '../models/videoModel.js'
 import User from '../models/userModel.js'
-import { fileURLToPath } from 'url';
 
 
 // @desc    Post a new video
@@ -108,6 +105,28 @@ const editVideo = (async (req, res) => {
 // @route   GET /api/videos/single
 // @access  Public
 const getVideo = (async (req, res) => {
+    const {video_id} = req.body
+
+    if(!video_id){
+        res.status(400)
+        throw new Error('No user_id');
+    }
+
+    try {
+
+        // Validate the user
+        const video = await Video.findOne({ _id: video_id });
+
+        if (!video) {
+            res.status(400)
+        }
+
+        res.json(video);
+        
+    } catch (error) {
+        res.status(500);
+        throw new Error(error);
+    }
     
 });
 
