@@ -1,0 +1,12 @@
+{
+  "name": "videoplayer",
+  "version": "1.0.0",
+  "description": "Educational Video Player",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Carlos Guerra",
+  "license": "MIT"
+}
